@@ -21,7 +21,13 @@
 int runInterface()
 {
 	UserInterface * window = new UserInterface;
-	//UserInterface window;
+	
+//	Fl_Text_Buffer * (window->textBuffer) = new Fl_Text_Buffer();
+	
+	//window->table->ptr_to_UserInterface = window;
+	
+	//window->text->buffer(window->textBuffer);
+	//window->resizable(*window->text);
 	window->show();
 
 	return Fl::run();
@@ -32,9 +38,9 @@ int main()
 {
 	int ret = runInterface();
 
-	std::cout << ret;
+	//std::cout << ret;
 
-	std::cin >> ret;
+	//std::cin >> ret;
 
 	return 0;
 

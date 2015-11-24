@@ -8,6 +8,7 @@
 #include <FL/Fl_Slider.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Table.H>
+#include <FL/Fl_Output.H>
 
 class FluidInterface {
 public:
@@ -22,5 +23,6 @@ public:
   Fl_Value_Input *m_value_5;
   Fl_Value_Input *m_value_4;
   Fl_Table *m_table;
+  Fl_Output *output1;
 };
 #endif

@@ -13,19 +13,20 @@
 #include <FL/Fl_Input.H>
 #include <FL/fl_draw.H>
 #include <FL/Fl_Table_Row.H>
+#include <FL/Fl_Text_Display.H>
 
 //const double TIMER_TIMEOUT = 1.0; // 1 sec
 class WidgetTable;
 
 class UserInterface : public FluidInterface
 {
+public:
 	static const double TIMER_TIMEOUT;// = 1.0;
 	bool m_is_animated;
 	int m_count;
-
-	
 	WidgetTable *table;
-
+	//static Fl_Text_Buffer *textBuffer;
+	//static Fl_Text_Display *text;
 
 public:
 	//constructors/destructor
@@ -38,6 +39,8 @@ public:
 };
 
 
+
+
 // Simple demonstration class to derive from Fl_Table_Row
 //
 class WidgetTable : public Fl_Table_Row
@@ -45,28 +48,24 @@ class WidgetTable : public Fl_Table_Row
 protected:
 	void draw_cell(TableContext context,  		// table cell drawing
 		int R = 0, int C = 0, int X = 0, int Y = 0, int W = 0, int H = 0);
-
+	
 public:
-
+	void * ptr_to_UserInterface;	//stores a pointer to window in which table is constructed. null at first. has to be set from outside.
 	int table_rows, table_cols;
-
-	void * myArrayInput[64][64] = { 0 };		// stores pointers to all the elements of the table
+	void * myArrayInput[500][500] = { 0 };		// stores pointers to all the elements of the table
 												//this is ugly - replace it with a vector?
 	void *returnLocation(int row, int col)//returns a pointer to table object at row col coordinates
 	{
 		return myArrayInput[row][col];
 	}
 
-	void button_cb(Fl_Widget *w, void * p);
-
+	static void button_cb(Fl_Widget *w, void * p);
 	WidgetTable(int x, int y, int w, int h, const char *l);// : Fl_Table_Row(x, y, w, h, l);
 	~WidgetTable() { }
-
 	void SetSize(int newrows, int newcols, WidgetTable * mytable)
 	{
 		rows(newrows);
 		cols(newcols);
-
 		begin();		// start adding widgets to group
 		{
 			for (int r = 0; r<newrows; r++)

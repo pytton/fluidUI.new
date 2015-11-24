@@ -3,13 +3,14 @@
 #include "FluidInterface.h"
 
 FluidInterface::FluidInterface() {
-  { m_win_timer = new Fl_Double_Window(1226, 675);
+  { m_win_timer = new Fl_Double_Window(1143, 729);
     m_win_timer->user_data((void*)(this));
     { m_btn_start = new Fl_Button(25, 25, 65, 40, "Start");
     } // Fl_Button* m_btn_start
     { m_btn_stop = new Fl_Button(125, 25, 65, 40, "Stop");
     } // Fl_Button* m_btn_stop
-    { m_slider_one = new Fl_Slider(935, 55, 40, 450, "mySlider");
+    { m_slider_one = new Fl_Slider(40, 625, 1770, 40, "mySlider");
+      m_slider_one->type(1);
       m_slider_one->minimum(10);
       m_slider_one->maximum(200);
     } // Fl_Slider* m_slider_one
@@ -26,6 +27,8 @@ FluidInterface::FluidInterface() {
     { m_table = new Fl_Table(205, 20, 610, 685);
       m_table->end();
     } // Fl_Table* m_table
+    { output1 = new Fl_Output(55, 540, 1675, 60, "output1");
+    } // Fl_Output* output1
     m_win_timer->end();
   } // Fl_Double_Window* m_win_timer
 }

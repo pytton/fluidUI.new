@@ -2,20 +2,21 @@
 #include <string>
 #include "UserInterface.h"
 
-#include <iostream>
-#include <sstream>
-
-#include <stdio.h>
-#include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Light_Button.H>
-#include <FL/Fl_Input.H>
-#include <FL/fl_draw.H>
-#include <FL/Fl_Table_Row.H>
+//#include <iostream>
+//#include <sstream>
+//
+//#include <stdio.h>
+//#include <FL/Fl.H>
+//#include <FL/Fl_Window.H>
+//#include <FL/Fl_Light_Button.H>
+//#include <FL/Fl_Input.H>
+//#include <FL/fl_draw.H>
+//#include <FL/Fl_Table_Row.H>
 
 const double UserInterface::TIMER_TIMEOUT = 1.0;
 
-
+//Fl_Text_Buffer * UserInterface::textBuffer;
+//Fl_Text_Display * UserInterface::text;
 
 UserInterface::UserInterface()
 {
@@ -25,18 +26,23 @@ UserInterface::UserInterface()
 	//add remove elements below:
 	m_win_timer->begin();
 	delete m_table;
-	WidgetTable * table = new WidgetTable(200, 20, 500, 500, "widgettable");
+	WidgetTable * table = new WidgetTable(200, 20, 600, 500, "widgettable");
 	//WidgetTable * myTablePointer = &table;
-	table->SetSize(50, 4, table);
-
+	table->SetSize(15, 250, table);
+	table->ptr_to_UserInterface = this;
 	//Fl_Input * ptr_btn = table->returnLocation(1, 1);
 	//win.end();
 	//win.resizable(table);
 	//win.show();
 
+//setting up the textdisplay with textbuffer:
+	//Fl_Text_Buffer * textBuffer = new Fl_Text_Buffer();
+	//text = new Fl_Text_Display(225, 760, 1075, 160, "text");
+	//text->buffer(textBuffer);
 
 
 
+//below just playing with creating new widgets outside of fluid:
 	Fl_Button* m_myExtraBtn = new Fl_Button(125, 125, 65, 40, "Extra");
 //	m_table->end();
 	m_win_timer->end();
@@ -83,6 +89,7 @@ void UserInterface::timer_event(void* userdata)
 
 WidgetTable::WidgetTable(int x, int y, int w, int h, const char *l = 0) : Fl_Table_Row(x, y, w, h, l)
 {
+	ptr_to_UserInterface = 0;
 	table_rows, table_cols = 20;
 	col_header(1);
 	col_resize(1);
@@ -155,27 +162,40 @@ void WidgetTable::button_cb(Fl_Widget *w, void * p)
 {
 	fprintf(stderr, "BUTTON: %s\n", (const char*)w->label());
 	Fl_Light_Button * pBtn = dynamic_cast<Fl_Light_Button*> (w);
-
 	WidgetTable * myTable = (WidgetTable*)p;
-
-
 	int myValue, myRow, myColumn = 0;
 	std::cin >> myValue >> myRow >> myColumn;
-
 	int cols = myTable->cols();
 
-	Fl_Widget  * myPtr  = myTable->child(myRow * cols + myColumn + 2);
+//	Fl_Widget  * myPtr  = myTable->child(myRow * cols + myColumn + 2);
+//	Fl_Input * myPtr = (Fl_Input *) myTable->child(myRow * cols + myColumn + 2);
 
-//	Fl_Input * myInputCell = (Fl_Input *) myTable->returnLocation(myRow, myColumn);
+	Fl_Input * myInputCell = (Fl_Input *) myTable->returnLocation(myRow, myColumn);
 
-//	Fl_Light_Button * myLightBtn = (Fl_Light_Button*)myTable->returnLocation(myRow, myColumn);
-
-	Fl_Input * myInputCell = (Fl_Input *) myPtr;
+//	Fl_Input * myInputCell = (Fl_Input *) myPtr;
 
 	std::stringstream buffer;
 	buffer << myValue;
+
+//	Fl_Input * myInputCell = (Fl_Input *)myPtr;
+//	myPtr->value(buffer.str().c_str());
+	
 	myInputCell->value(buffer.str().c_str());
+	UserInterface * myInterface = (UserInterface*) myTable->ptr_to_UserInterface;
+	double inputValue = myInterface->m_value_1->value();
+	std::stringstream buffer2;
+	buffer2 << inputValue;
+	myInputCell->value(buffer2.str().c_str());
+
+	myInterface->m_value_2->value(myValue);
+
+	myInterface->output1->value(buffer2.str().c_str());
+
+	//myInterface->text->buffer(myInterface->textBuffer);
 
 	
+	//myInterface->textBuffer->text("callback run\n");	//pushing text to textBuffer to display in fl_text_Display
 
+	
 }
+
