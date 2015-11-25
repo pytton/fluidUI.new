@@ -18,10 +18,31 @@
 
 #include <iostream>
 
+class Pointers
+{
+public:
+	void * ptr_t_UserInterface;
+
+	void set_ptr_t_UserInterface(void * pointer)
+	{
+		ptr_t_UserInterface = pointer;
+	}
+
+	void * get_ptr_t_UserInterface()
+	{
+		return ptr_t_UserInterface;
+	}
+};
+
 int runInterface()
 {
 	UserInterface * window = new UserInterface;
-	
+	Pointers pointers;
+
+	window->table->SetSize(10, 10, window->table);
+	//pointers.set_ptr_t_UserInterface(window);
+	//window->setptr();
+
 //	Fl_Text_Buffer * (window->textBuffer) = new Fl_Text_Buffer();
 	
 	//window->table->ptr_to_UserInterface = window;

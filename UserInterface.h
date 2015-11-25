@@ -21,6 +21,8 @@ class WidgetTable;
 class UserInterface : public FluidInterface
 {
 public:
+	
+	
 	static const double TIMER_TIMEOUT;// = 1.0;
 	bool m_is_animated;
 	int m_count;
@@ -36,6 +38,9 @@ public:
 	static void cb_btn_start_callback(Fl_Widget* btn, void* userdata);
 	static void cb_btn_stop_callback(Fl_Widget* btn, void* userdata);
 	static void timer_event(void* userdata);
+
+	void setptr();
+
 };
 
 
@@ -50,16 +55,20 @@ protected:
 		int R = 0, int C = 0, int X = 0, int Y = 0, int W = 0, int H = 0);
 	
 public:
+	Fl_Widget * WidgetTable::GetElement(int nRow, int nCol);
 	void * ptr_to_UserInterface;	//stores a pointer to window in which table is constructed. null at first. has to be set from outside.
 	int table_rows, table_cols;
-	void * myArrayInput[500][500] = { 0 };		// stores pointers to all the elements of the table
-												//this is ugly - replace it with a vector?
-	void *returnLocation(int row, int col)//returns a pointer to table object at row col coordinates
-	{
-		return myArrayInput[row][col];
-	}
+	//void * myArrayInput[500][500] = { 0 };		// stores pointers to all the elements of the table
+	//											//this is ugly - replace it with a vector?
+	//void *returnLocation(int row, int col)//returns a pointer to table object at row col coordinates
+	//{
+	//	return myArrayInput[row][col];
+	//}
 
 	static void button_cb(Fl_Widget *w, void * p);
+
+
+
 	WidgetTable(int x, int y, int w, int h, const char *l);// : Fl_Table_Row(x, y, w, h, l);
 	~WidgetTable() { }
 	void SetSize(int newrows, int newcols, WidgetTable * mytable)
@@ -81,7 +90,7 @@ public:
 						// Create the input widgets
 						sprintf(s, "%d.%d", r, c);
 						Fl_Input *in = new Fl_Input(X, Y, W, H);
-						myArrayInput[r][c] = in;	///////////////////////////////to access Fl_input ------> c has to be odd(not even)
+//						myArrayInput[r][c] = in;	///////////////////////////////to access Fl_input ------> c has to be odd(not even)
 						in->value(s);
 					}
 					else
@@ -97,6 +106,7 @@ public:
 			}
 		}
 		end();
+		
 	}
 };
 

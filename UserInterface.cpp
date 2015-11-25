@@ -20,16 +20,22 @@ const double UserInterface::TIMER_TIMEOUT = 1.0;
 
 UserInterface::UserInterface()
 {
+	
 	m_is_animated = false;
 	m_count = 0;
-	
+	m_value_1->value(0);
+	m_value_2->value(0);
+	m_value_3->value(0);
+	m_value_4->value(0);
+	m_value_5->value(0);
+
 	//add remove elements below:
 	m_win_timer->begin();
 	delete m_table;
 	WidgetTable * table = new WidgetTable(200, 20, 600, 500, "widgettable");
-	//WidgetTable * myTablePointer = &table;
-	table->SetSize(15, 250, table);
-	table->ptr_to_UserInterface = this;
+
+	
+//	WidgetTable * myTablePointer = &table;
 	//Fl_Input * ptr_btn = table->returnLocation(1, 1);
 	//win.end();
 	//win.resizable(table);
@@ -47,6 +53,16 @@ UserInterface::UserInterface()
 //	m_table->end();
 	m_win_timer->end();
 
+	table->SetSize(15, 250, table);
+	table->ptr_to_UserInterface = this;
+
+
+
+}
+
+void UserInterface::setptr()
+{
+	table->ptr_to_UserInterface = this;
 }
 
 void UserInterface::show()
@@ -89,7 +105,7 @@ void UserInterface::timer_event(void* userdata)
 
 WidgetTable::WidgetTable(int x, int y, int w, int h, const char *l = 0) : Fl_Table_Row(x, y, w, h, l)
 {
-	ptr_to_UserInterface = 0;
+	//ptr_to_UserInterface = 0;
 	table_rows, table_cols = 20;
 	col_header(1);
 	col_resize(1);
@@ -160,42 +176,73 @@ void WidgetTable::draw_cell(TableContext context,
 
 void WidgetTable::button_cb(Fl_Widget *w, void * p)
 {
-	fprintf(stderr, "BUTTON: %s\n", (const char*)w->label());
-	Fl_Light_Button * pBtn = dynamic_cast<Fl_Light_Button*> (w);
-	WidgetTable * myTable = (WidgetTable*)p;
-	int myValue, myRow, myColumn = 0;
-	std::cin >> myValue >> myRow >> myColumn;
-	int cols = myTable->cols();
+	//fprintf(stderr, "BUTTON: %s\n", (const char*)w->label());
+	//Fl_Light_Button * pBtn = dynamic_cast<Fl_Light_Button*> (w);
+	WidgetTable * myTable = (WidgetTable*)(p);
+	//WidgetTable * myTable = static_cast<WidgetTable*>(p);
+	UserInterface * myUserInterface = (UserInterface*)(myTable->ptr_to_UserInterface);
+	//UserInterface * myUserInterface = static_cast<UserInterface*>(myTable->ptr_to_UserInterface);
 
-//	Fl_Widget  * myPtr  = myTable->child(myRow * cols + myColumn + 2);
-//	Fl_Input * myPtr = (Fl_Input *) myTable->child(myRow * cols + myColumn + 2);
+	int  myRow = 0, myColumn = 0;
+	double myValue = 0;
+	//myValue = 0;
+	//myRow = 0;
+	//myColumn = 0;
+	//std::cin >> myValue >> myRow >> myColumn;
+	//Fl_Input * myInputCell = (Fl_Input *) myTable->returnLocation(myRow, myColumn);
 
-	Fl_Input * myInputCell = (Fl_Input *) myTable->returnLocation(myRow, myColumn);
 
-//	Fl_Input * myInputCell = (Fl_Input *) myPtr;
 
+	myUserInterface->m_value_1->label("Enter value:");
+	myUserInterface->m_value_2->label("Row:");
+	myUserInterface->m_value_3->label("Column:");
+
+	double dValue = 0;
+	dValue = myUserInterface->m_value_1->value();
+	myValue = dValue;
+	double dmyRow = 0;
+	dmyRow = myUserInterface->m_value_2->value();
+	double dmyColumn = 0;
+	dmyColumn = myUserInterface->m_value_3->value();
+
+	myRow = (int)dmyRow;
+	myColumn = (int)dmyColumn;
 	std::stringstream buffer;
 	buffer << myValue;
 
-//	Fl_Input * myInputCell = (Fl_Input *)myPtr;
-//	myPtr->value(buffer.str().c_str());
+	Fl_Widget * myWidget = myTable->GetElement(myRow, myColumn);
+	Fl_Input * myCell = dynamic_cast<Fl_Input*>(myWidget);
+
+	myWidget = myTable->GetElement(myRow, myColumn);
 	
-	myInputCell->value(buffer.str().c_str());
-	UserInterface * myInterface = (UserInterface*) myTable->ptr_to_UserInterface;
-	double inputValue = myInterface->m_value_1->value();
-	std::stringstream buffer2;
-	buffer2 << inputValue;
-	myInputCell->value(buffer2.str().c_str());
+	//myCell = (Fl_Input)(myWidget);
+	myCell = dynamic_cast<Fl_Input*>(myWidget);
+	myCell->value(buffer.str().c_str());
 
-	myInterface->m_value_2->value(myValue);
+	//myCell->value() = dValue;
 
-	myInterface->output1->value(buffer2.str().c_str());
+	//myWidget = myTable->GetElement( myRow+1, myColumn);
+	//myCell = dynamic_cast<Fl_Input*>(myWidget);
+	//myCell->value(buffer.str().c_str());
 
-	//myInterface->text->buffer(myInterface->textBuffer);
+	//myWidget = myTable->GetElement(myRow + 2, myColumn);
+	//myCell = dynamic_cast<Fl_Input*>(myWidget);
+	//myCell->value(buffer.str().c_str());
 
-	
+	//myInterface->text->buffer(myInterface->textBuffer);	
 	//myInterface->textBuffer->text("callback run\n");	//pushing text to textBuffer to display in fl_text_Display
-
-	
 }
 
+
+Fl_Widget * WidgetTable::GetElement(int nRow, int nCol)
+{
+	int numCol = this->cols();
+	int nIndex = nRow * numCol + nCol;
+	return this->child(nIndex);
+}
+
+//void * ret_ptr_to_UserInterface()
+//{
+//	return * ptr_to_U
+//
+//}
