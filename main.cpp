@@ -15,33 +15,53 @@
 
 
 #include "UserInterface.h"
-
+#include "Pointers.h"
 #include <iostream>
 
-class Pointers
+/*
+
+//////////
+STRUCTURE:
+//////////
+
+ONLY THREE MAIN PARTS (everything else included in on of three parts as a sub-part)
+
+DIPLAY
+DATA
+CONTROL
+
+Pointers - seperate - stores pointers to all three main parts
+
+
+
+FluidInterface - base class for UserInterface - made by Fluid for easy modification. NEVER CHANGE THIS - to make changes - use fluid.exe
+UserInterface - main display window
+Control????
+OrderBook - store all orders here
+MarketData - get data from here (live data? stored data? how?)
+StreamOfMktSnap - part of MarketData?
+
+
+
+Algo - make decisions here (one algo? more algos?)
+
+
+
+
+
+*/
+
+
+
+int Control(Pointers  * pointers)
 {
-public:
-	void * ptr_t_UserInterface;
 
-	void set_ptr_t_UserInterface(void * pointer)
-	{
-		ptr_t_UserInterface = pointer;
-	}
+	UserInterface *window = (UserInterface*)pointers->get_ptr_t_UserInterface();
+	
+	//UserInterface * window = new UserInterface;
+	
 
-	void * get_ptr_t_UserInterface()
-	{
-		return ptr_t_UserInterface;
-	}
-};
-
-int runInterface()
-{
-	UserInterface * window = new UserInterface;
-	Pointers pointers;
-
-	window->table->SetSize(10, 10, window->table);
-	//pointers.set_ptr_t_UserInterface(window);
-	//window->setptr();
+//	UserInterface * window2 = new UserInterface;
 
 //	Fl_Text_Buffer * (window->textBuffer) = new Fl_Text_Buffer();
 	
@@ -50,24 +70,24 @@ int runInterface()
 	//window->text->buffer(window->textBuffer);
 	//window->resizable(*window->text);
 	window->show();
-
+//	window2->show();
 	return Fl::run();
 }
 
 
 int main()
 {
-	int ret = runInterface();
+	Pointers * pointers = new Pointers;
+	UserInterface * window = new UserInterface;
+	pointers->set_ptr_t_UserInterface(window);
+	
+	
+	
+	Control(pointers);
 
-	//std::cout << ret;
 
-	//std::cin >> ret;
+
+
 
 	return 0;
-
-	//UserInterface * window = new UserInterface;
-	////UserInterface window;
-	//window->show();
-
-	//return Fl::run();
 }

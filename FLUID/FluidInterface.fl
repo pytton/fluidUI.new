@@ -6,8 +6,8 @@ class FluidInterface {open
 } {
   Function {FluidInterface()} {open
   } {
-    Fl_Window m_win_timer {open
-      xywh {313 41 1143 729} type Double visible
+    Fl_Window m_win_timer {open selected
+      xywh {213 217 1127 713} type Double visible
     } {
       Fl_Button m_btn_start {
         label Start
@@ -15,11 +15,11 @@ class FluidInterface {open
       }
       Fl_Button m_btn_stop {
         label Stop
-        xywh {125 25 65 40}
+        xywh {120 255 65 40}
       }
       Fl_Slider m_slider_one {
-        label mySlider selected
-        xywh {40 625 1770 40} type Horizontal minimum 10 maximum 200
+        label mySlider
+        xywh {60 580 800 55} type Horizontal minimum 10 maximum 200
       }
       Fl_Value_Input m_value_1 {
         label value1
@@ -39,15 +39,11 @@ class FluidInterface {open
       }
       Fl_Value_Input m_value_4 {
         label value4
-        xywh {80 140 45 20}
+        xywh {140 205 45 20}
       }
       Fl_Table m_table {open
-        xywh {205 20 610 685}
+        xywh {210 45 595 330}
       } {}
-      Fl_Output output1 {
-        label output1
-        xywh {55 540 1675 60}
-      }
     }
   }
 } 

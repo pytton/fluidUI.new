@@ -3,13 +3,13 @@
 #include "FluidInterface.h"
 
 FluidInterface::FluidInterface() {
-  { m_win_timer = new Fl_Double_Window(1143, 729);
+  { m_win_timer = new Fl_Double_Window(1127, 713);
     m_win_timer->user_data((void*)(this));
     { m_btn_start = new Fl_Button(25, 25, 65, 40, "Start");
     } // Fl_Button* m_btn_start
-    { m_btn_stop = new Fl_Button(125, 25, 65, 40, "Stop");
+    { m_btn_stop = new Fl_Button(120, 255, 65, 40, "Stop");
     } // Fl_Button* m_btn_stop
-    { m_slider_one = new Fl_Slider(40, 625, 1770, 40, "mySlider");
+    { m_slider_one = new Fl_Slider(60, 580, 800, 55, "mySlider");
       m_slider_one->type(1);
       m_slider_one->minimum(10);
       m_slider_one->maximum(200);
@@ -22,13 +22,11 @@ FluidInterface::FluidInterface() {
     } // Fl_Value_Input* m_value_3
     { m_value_5 = new Fl_Value_Input(75, 355, 45, 20, "value5");
     } // Fl_Value_Input* m_value_5
-    { m_value_4 = new Fl_Value_Input(80, 140, 45, 20, "value4");
+    { m_value_4 = new Fl_Value_Input(140, 205, 45, 20, "value4");
     } // Fl_Value_Input* m_value_4
-    { m_table = new Fl_Table(205, 20, 610, 685);
+    { m_table = new Fl_Table(210, 45, 595, 330);
       m_table->end();
     } // Fl_Table* m_table
-    { output1 = new Fl_Output(55, 540, 1675, 60, "output1");
-    } // Fl_Output* output1
     m_win_timer->end();
   } // Fl_Double_Window* m_win_timer
 }

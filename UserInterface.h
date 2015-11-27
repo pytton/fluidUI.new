@@ -27,8 +27,9 @@ public:
 	bool m_is_animated;
 	int m_count;
 	WidgetTable *table;
-	//static Fl_Text_Buffer *textBuffer;
-	//static Fl_Text_Display *text;
+
+	Fl_Text_Buffer * textBuffer;// = new Fl_Text_Buffer();
+	Fl_Text_Display * text;// = new Fl_Text_Display(205, 210, 475, 160, "text");
 
 public:
 	//constructors/destructor
@@ -38,7 +39,6 @@ public:
 	static void cb_btn_start_callback(Fl_Widget* btn, void* userdata);
 	static void cb_btn_stop_callback(Fl_Widget* btn, void* userdata);
 	static void timer_event(void* userdata);
-
 	void setptr();
 
 };
@@ -58,12 +58,7 @@ public:
 	Fl_Widget * WidgetTable::GetElement(int nRow, int nCol);
 	void * ptr_to_UserInterface;	//stores a pointer to window in which table is constructed. null at first. has to be set from outside.
 	int table_rows, table_cols;
-	//void * myArrayInput[500][500] = { 0 };		// stores pointers to all the elements of the table
-	//											//this is ugly - replace it with a vector?
-	//void *returnLocation(int row, int col)//returns a pointer to table object at row col coordinates
-	//{
-	//	return myArrayInput[row][col];
-	//}
+
 
 	static void button_cb(Fl_Widget *w, void * p);
 
@@ -88,10 +83,9 @@ public:
 					if (c != 0) //this used to be ( c & 1) -bitwise comparison
 					{
 						// Create the input widgets
-						sprintf(s, "%d.%d", r, c);
+						//sprintf(s, "%d.%d", r, c);
 						Fl_Input *in = new Fl_Input(X, Y, W, H);
-//						myArrayInput[r][c] = in;	///////////////////////////////to access Fl_input ------> c has to be odd(not even)
-						in->value(s);
+						//in->value(s);
 					}
 					else
 					{

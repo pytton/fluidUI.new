@@ -141,6 +141,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FLUID\FluidInterface.h" />
+    <ClInclude Include="MktSnapshot.h" />
+    <ClInclude Include="Pointers.h" />
     <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
