@@ -3,30 +3,48 @@
 #include "FluidInterface.h"
 
 FluidInterface::FluidInterface() {
-  { m_win_timer = new Fl_Double_Window(1127, 713);
+  { m_win_timer = new Fl_Double_Window(1067, 552);
     m_win_timer->user_data((void*)(this));
-    { m_btn_start = new Fl_Button(25, 25, 65, 40, "Start");
-    } // Fl_Button* m_btn_start
-    { m_btn_stop = new Fl_Button(120, 255, 65, 40, "Stop");
-    } // Fl_Button* m_btn_stop
-    { m_slider_one = new Fl_Slider(60, 580, 800, 55, "mySlider");
-      m_slider_one->type(1);
+    { m_btn_load_data = new Fl_Button(15, 205, 75, 55, "Load historical data");
+      m_btn_load_data->align(Fl_Align(FL_ALIGN_WRAP));
+    } // Fl_Button* m_btn_load_data
+    { m_slider_one = new Fl_Slider(285, 15, 35, 490, "mySlider");
+      m_slider_one->type(4);
       m_slider_one->minimum(10);
       m_slider_one->maximum(200);
     } // Fl_Slider* m_slider_one
-    { m_value_1 = new Fl_Value_Input(80, 80, 45, 20, "value1");
-    } // Fl_Value_Input* m_value_1
-    { m_value_2 = new Fl_Value_Input(80, 100, 45, 20, "value2");
-    } // Fl_Value_Input* m_value_2
-    { m_value_3 = new Fl_Value_Input(80, 120, 45, 20, "value3");
-    } // Fl_Value_Input* m_value_3
-    { m_value_5 = new Fl_Value_Input(75, 355, 45, 20, "value5");
-    } // Fl_Value_Input* m_value_5
-    { m_value_4 = new Fl_Value_Input(140, 205, 45, 20, "value4");
-    } // Fl_Value_Input* m_value_4
-    { m_table = new Fl_Table(210, 45, 595, 330);
+    { m_starting_bid = new Fl_Value_Input(130, 15, 45, 20, "Starting Bid");
+    } // Fl_Value_Input* m_starting_bid
+    { m_curr_ask = new Fl_Value_Input(130, 40, 45, 20, "Current Ask");
+    } // Fl_Value_Input* m_curr_ask
+    { m_top_limit = new Fl_Value_Input(130, 90, 45, 20, "Top Limit");
+    } // Fl_Value_Input* m_top_limit
+    { m_top_profit = new Fl_Value_Input(130, 140, 45, 20, "Profit at top lim");
+    } // Fl_Value_Input* m_top_profit
+    { m_table = new Fl_Table(350, 15, 685, 495);
       m_table->end();
     } // Fl_Table* m_table
+    { m_curr_bid = new Fl_Value_Input(130, 65, 45, 20, "Current Bid");
+    } // Fl_Value_Input* m_curr_bid
+    { m_bottom_limit = new Fl_Value_Input(130, 115, 45, 20, "Bottom Limit");
+    } // Fl_Value_Input* m_bottom_limit
+    { m_bottom_profit = new Fl_Value_Input(130, 165, 45, 20, "Profit at bottom lim");
+    } // Fl_Value_Input* m_bottom_profit
+    { m_btn_up = new Fl_Button(200, 15, 65, 40, "Up");
+    } // Fl_Button* m_btn_up
+    { m_btn_down = new Fl_Button(200, 70, 65, 40, "Down");
+    } // Fl_Button* m_btn_down
+    { m_btn_next = new Fl_Button(105, 205, 80, 55, "Next");
+    } // Fl_Button* m_btn_next
+    { m_btn_initAlgo = new Fl_Button(15, 285, 80, 55, "Initialize Algo");
+      m_btn_initAlgo->align(Fl_Align(FL_ALIGN_WRAP));
+    } // Fl_Button* m_btn_initAlgo
     m_win_timer->end();
   } // Fl_Double_Window* m_win_timer
+  { window2 = new Fl_Double_Window(262, 298, "window2");
+    window2->user_data((void*)(this));
+    { text_display = new Fl_Text_Display(25, 25, 225, 255, "text");
+    } // Fl_Text_Display* text_display
+    window2->end();
+  } // Fl_Double_Window* window2
 }

@@ -24,13 +24,13 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="tableImported.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="FLUID\FluidInterface.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UserInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

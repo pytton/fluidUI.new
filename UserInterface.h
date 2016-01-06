@@ -16,92 +16,54 @@
 #include <FL/Fl_Text_Display.H>
 
 //const double TIMER_TIMEOUT = 1.0; // 1 sec
-class WidgetTable;
+class WidgetTable;	//forward declaration
 
 class UserInterface : public FluidInterface
 {
-public:
-	
-	
-	static const double TIMER_TIMEOUT;// = 1.0;
+public:	
+	static const double TIMER_TIMEOUT;// = 1.0; used for callback from Youtube video
 	bool m_is_animated;
 	int m_count;
-	WidgetTable *table;
+	WidgetTable *table;		
+	//this replaces regular Fl_Table with my custom one
+	
+	Fl_Text_Buffer * textBuffer;
+	Fl_Text_Display * text;
+	std::stringstream textDisplayString;
 
-	Fl_Text_Buffer * textBuffer;// = new Fl_Text_Buffer();
-	Fl_Text_Display * text;// = new Fl_Text_Display(205, 210, 475, 160, "text");
-
-public:
 	//constructors/destructor
 	UserInterface();
 	void show();
+	
 	//callback functions
-	static void cb_btn_start_callback(Fl_Widget* btn, void* userdata);
-	static void cb_btn_stop_callback(Fl_Widget* btn, void* userdata);
-	static void timer_event(void* userdata);
-	void setptr();
-
+	static void cb_btn_start_callback(Fl_Widget* btn, void* userdata);	//from youtube video - timeout feature demo
+	static void cb_btn_stop_callback(Fl_Widget* btn, void* userdata);	//form youtube
+	static void timer_event(void* userdata);							//from youtube - timeout
+	//void setptr();	//OLD CODE? DO I STILL NEED THIS?
 };
 
-
-
-
-// Simple demonstration class to derive from Fl_Table_Row
-//
-class WidgetTable : public Fl_Table_Row
+class WidgetTable : public Fl_Table_Row		//WigetTable - table with cells drawed inside it
 {
 protected:
 	void draw_cell(TableContext context,  		// table cell drawing
-		int R = 0, int C = 0, int X = 0, int Y = 0, int W = 0, int H = 0);
+		int R = 0, int C = 0, int X = 0, int Y = 0, int W = 0, int H = 0);	//supplied from example - dont know how this works
 	
 public:
 	Fl_Widget * WidgetTable::GetElement(int nRow, int nCol);
+	//returns a pointer to the cell in the table at nRow nCol
+
 	void * ptr_to_UserInterface;	//stores a pointer to window in which table is constructed. null at first. has to be set from outside.
 	int table_rows, table_cols;
 
+	//callbacks:
+	static void button_cb(Fl_Widget *w, void * p);	//callbacks in fltk have to be static
 
-	static void button_cb(Fl_Widget *w, void * p);
-
-
-
-	WidgetTable(int x, int y, int w, int h, const char *l);// : Fl_Table_Row(x, y, w, h, l);
+	//constructor:
+	WidgetTable(int x, int y, int w, int h, const char *l);
 	~WidgetTable() { }
-	void SetSize(int newrows, int newcols, WidgetTable * mytable)
-	{
-		rows(newrows);
-		cols(newcols);
-		begin();		// start adding widgets to group
-		{
-			for (int r = 0; r<newrows; r++)
-			{
-				for (int c = 0; c<newcols; c++)
-				{
-					int X, Y, W, H;
-					find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
-
-					char s[40];
-					if (c != 0) //this used to be ( c & 1) -bitwise comparison
-					{
-						// Create the input widgets
-						//sprintf(s, "%d.%d", r, c);
-						Fl_Input *in = new Fl_Input(X, Y, W, H);
-						//in->value(s);
-					}
-					else
-					{
-						// Create the light buttons
-						sprintf(s, "%d/%d ", r, c);
-						Fl_Light_Button *butt = new Fl_Light_Button(X, Y, W, H, strdup(s));
-						butt->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
-						butt->callback(button_cb,  (void*) mytable );
-						butt->value(((r + c * 2) & 4) ? 1 : 0);
-					}
-				}
-			}
-		}
-		end();
-		
-	}
+	
+	//the below function fills the table with cells:
+	void SetSize(int newrows, int newcols, WidgetTable * mytable);
 };
 
 

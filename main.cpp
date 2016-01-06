@@ -6,7 +6,7 @@
 //TODO:
 
 //add a Control class where the main program will run
-//ass an Algo class which will house all the algos and be accessed by Control - this is where trading decisions are made
+//add an Algo class which will house all the algos and be accessed by Control - this is where trading decisions are made
 //add a Data class which will deal with all the data - at first loaded from a file into some structure database
 //at a later point the Data class will be getting a live feed from Interactive Brokers
 //connect all the classes with pointers so they know about each other's existance - possibly through just one class
@@ -17,6 +17,7 @@
 #include "UserInterface.h"
 #include "Pointers.h"
 #include <iostream>
+#include <string>
 
 /*
 
@@ -35,7 +36,7 @@ Pointers - seperate - stores pointers to all three main parts
 
 
 FluidInterface - base class for UserInterface - made by Fluid for easy modification. NEVER CHANGE THIS - to make changes - use fluid.exe
-UserInterface - main display window
+UserInterface - main display window derived from FluidInterface
 Control????
 OrderBook - store all orders here
 MarketData - get data from here (live data? stored data? how?)
@@ -53,41 +54,56 @@ Algo - make decisions here (one algo? more algos?)
 
 
 
-int Control(Pointers  * pointers)
+//int launch(Pointers  * pointers)
+//{
+//	//UserInterface *window = (UserInterface*)pointers->get_ptr_t_UserInterface();
+//	//window->show();
+//	//return Fl::run();
+//	return 0;
+//}
+
+//this function ensures classes Display, Data and Control can see each other:
+void setPointers(Pointers* pointers)	//this function ensures classes Display, Data and Control can see each other:
 {
-
-	UserInterface *window = (UserInterface*)pointers->get_ptr_t_UserInterface();
 	
-	//UserInterface * window = new UserInterface;
-	
-
-//	UserInterface * window2 = new UserInterface;
-
-//	Fl_Text_Buffer * (window->textBuffer) = new Fl_Text_Buffer();
-	
-	//window->table->ptr_to_UserInterface = window;
-	
-	//window->text->buffer(window->textBuffer);
-	//window->resizable(*window->text);
-	window->show();
-//	window2->show();
-	return Fl::run();
+	//set pointers in Display:
+	pointers->ptr_t_display->ptr_t_control = pointers->ptr_t_control;
+	pointers->ptr_t_display->ptr_t_data = pointers->ptr_t_data;
+	//set pointers in Data:
+	pointers->ptr_t_data->ptr_t_control = pointers->ptr_t_control;
+	pointers->ptr_t_data->ptr_t_display = pointers->ptr_t_display;
+	//set pointers in Control:
+	pointers->ptr_t_control->ptr_t_data = pointers->ptr_t_data;
+	pointers->ptr_t_control->ptr_t_display = pointers->ptr_t_display;
 }
-
 
 int main()
 {
-	Pointers * pointers = new Pointers;
-	UserInterface * window = new UserInterface;
-	pointers->set_ptr_t_UserInterface(window);
+	//problem - make sure all three classes can communicate between each other
+	//create three main parts of the program:
+	Display * display = new Display;
+	Data * data = new Data;
+	Control * control = new Control;
 	
+	Pointers * pointers = new Pointers;	//this enables easy communication between three classes
+	pointers->initPointers(display, data, control);	//initialize pointers inside Pointers class
+	setPointers(pointers);	//set pointers inside Display, Data and Control classes
+
+//	pointers->ptr_t_data->MktSnapshot(/*pointers->ptr_t_data.ptr_histSavedData*/);	//load historical data saved in Sample2.txt
+
+	//below - test sample data loaded correctly?
+//	std::vector<MktSnap> tempvector = pointers->ptr_t_data->histSavedData;
+//	std::cout << std::endl << tempvector[3].m_str_timems;
+
+//	std::vector<MktSnap> *tempvector2 = &pointers->ptr_t_data->histSavedData;
+	//std::cout << *(tempvector2[3]).m_str_timems;
+
+//	std::vector<MktSnap> myVect = *tempvector2;
+//	std::cout << std::endl << myVect[5].m_str_timems;
+
+//	display->window->show();		//Display UserInterface - main GUI window
 	
-	
-	Control(pointers);
+	pointers->ptr_t_display->window->show();	//same as line above
 
-
-
-
-
-	return 0;
+	return Fl::run();
 }

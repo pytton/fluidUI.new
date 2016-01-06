@@ -7,43 +7,72 @@ class FluidInterface {open
   Function {FluidInterface()} {open
   } {
     Fl_Window m_win_timer {open selected
-      xywh {213 217 1127 713} type Double visible
+      xywh {356 349 1067 552} type Double visible
     } {
-      Fl_Button m_btn_start {
-        label Start
-        xywh {25 25 65 40}
-      }
-      Fl_Button m_btn_stop {
-        label Stop
-        xywh {120 255 65 40}
+      Fl_Button m_btn_load_data {
+        label {Load historical data}
+        xywh {15 205 75 55} align 128
       }
       Fl_Slider m_slider_one {
         label mySlider
-        xywh {60 580 800 55} type Horizontal minimum 10 maximum 200
+        xywh {285 15 35 490} type {Vert Knob} minimum 10 maximum 200
       }
-      Fl_Value_Input m_value_1 {
-        label value1
-        xywh {80 80 45 20}
+      Fl_Value_Input m_starting_bid {
+        label {Starting Bid}
+        xywh {130 15 45 20}
       }
-      Fl_Value_Input m_value_2 {
-        label value2
-        xywh {80 100 45 20}
+      Fl_Value_Input m_curr_ask {
+        label {Current Ask}
+        xywh {130 40 45 20}
       }
-      Fl_Value_Input m_value_3 {
-        label value3
-        xywh {80 120 45 20}
+      Fl_Value_Input m_top_limit {
+        label {Top Limit}
+        xywh {130 90 45 20}
       }
-      Fl_Value_Input m_value_5 {
-        label value5
-        xywh {75 355 45 20}
-      }
-      Fl_Value_Input m_value_4 {
-        label value4
-        xywh {140 205 45 20}
+      Fl_Value_Input m_top_profit {
+        label {Profit at top lim}
+        xywh {130 140 45 20}
       }
       Fl_Table m_table {open
-        xywh {210 45 595 330}
+        xywh {350 15 685 495}
       } {}
+      Fl_Value_Input m_curr_bid {
+        label {Current Bid}
+        xywh {130 65 45 20}
+      }
+      Fl_Value_Input m_bottom_limit {
+        label {Bottom Limit}
+        xywh {130 115 45 20}
+      }
+      Fl_Value_Input m_bottom_profit {
+        label {Profit at bottom lim}
+        xywh {130 165 45 20}
+      }
+      Fl_Button m_btn_up {
+        label Up
+        xywh {200 15 65 40}
+      }
+      Fl_Button m_btn_down {
+        label Down
+        xywh {200 70 65 40}
+      }
+      Fl_Button m_btn_next {
+        label Next
+        xywh {105 205 80 55}
+      }
+      Fl_Button m_btn_initAlgo {
+        label {Initialize Algo}
+        xywh {15 285 80 55} align 128
+      }
+    }
+    Fl_Window window2 {
+      label window2 open
+      xywh {1486 198 262 298} type Double visible
+    } {
+      Fl_Text_Display text_display {
+        label text
+        xywh {25 25 225 255}
+      }
     }
   }
 } 

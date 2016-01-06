@@ -8,19 +8,27 @@
 #include <FL/Fl_Slider.H>
 #include <FL/Fl_Value_Input.H>
 #include <FL/Fl_Table.H>
+#include <FL/Fl_Text_Display.H>
 
 class FluidInterface {
 public:
   FluidInterface();
   Fl_Double_Window *m_win_timer;
-  Fl_Button *m_btn_start;
-  Fl_Button *m_btn_stop;
+  Fl_Button *m_btn_load_data;
   Fl_Slider *m_slider_one;
-  Fl_Value_Input *m_value_1;
-  Fl_Value_Input *m_value_2;
-  Fl_Value_Input *m_value_3;
-  Fl_Value_Input *m_value_5;
-  Fl_Value_Input *m_value_4;
+  Fl_Value_Input *m_starting_bid;
+  Fl_Value_Input *m_curr_ask;
+  Fl_Value_Input *m_top_limit;
+  Fl_Value_Input *m_top_profit;
   Fl_Table *m_table;
+  Fl_Value_Input *m_curr_bid;
+  Fl_Value_Input *m_bottom_limit;
+  Fl_Value_Input *m_bottom_profit;
+  Fl_Button *m_btn_up;
+  Fl_Button *m_btn_down;
+  Fl_Button *m_btn_next;
+  Fl_Button *m_btn_initAlgo;
+  Fl_Double_Window *window2;
+  Fl_Text_Display *text_display;
 };
 #endif

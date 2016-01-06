@@ -7,30 +7,30 @@ const double UserInterface::TIMER_TIMEOUT = 1.0;
 //Fl_Text_Buffer * UserInterface::textBuffer;
 //Fl_Text_Display * UserInterface::text;
 
-UserInterface::UserInterface()
+UserInterface::UserInterface()	//constructor
 {
 	
-	m_is_animated = false;
-	m_count = 0;
-	m_value_1->value(1);
-	m_value_2->value(1);
-	m_value_3->value(1);
-	m_value_4->value(1);
-	m_value_5->value(1);
+	m_is_animated = false;	m_count = 0;	//used by youtube functions for timeout demo
+	
+	//m_value_1->value(1);	//setting the 5 input window values
+	//m_value_2->value(1);
+	//m_value_3->value(1);
+	//m_value_4->value(1);
+	//m_value_5->value(1);
 
-	m_value_1->label("Enter value:");
-	m_value_2->label("Row:");
-	m_value_3->label("Column:");
+	//m_value_1->label("Enter value:");
+	//m_value_2->label("Row:");
+	//m_value_3->label("Column:");
 
 	//add remove elements below:
 	m_win_timer->begin();
 	delete m_table;
-	WidgetTable * table = new WidgetTable(200, 20, 1143 - 200 - 50, 500, "widgettable");
+	WidgetTable * table = new WidgetTable(350, 15, 685, 495, "widgettable");	//size and location of table
 
 //setting up the textdisplay with textbuffer:
 	textBuffer = new Fl_Text_Buffer();
-	text = new Fl_Text_Display(205, 210, 475, 160, "text");
-	text->buffer(textBuffer);
+	//text = new Fl_Text_Display(205, 210, 475, 160, "text");
+	text_display->buffer(textBuffer);
 
 
 
@@ -38,20 +38,22 @@ UserInterface::UserInterface()
 //	Fl_Button* m_myExtraBtn = new Fl_Button(125, 125, 65, 40, "Extra");
 	m_win_timer->end();
 
+//creting cells inside table:
 	table->ptr_to_UserInterface = this;	//tells WidgetTable the location of Userinterface - for callbacks in WidgetTable
-	table->SetSize(15, 250, table);
+	table->SetSize(100, 25, table);		//this needs to be called to construct all the cells of WidgetTable
 }
 
-void UserInterface::setptr()
-{
-	table->ptr_to_UserInterface = this;
-}
+//void UserInterface::setptr()		//OLD CODE?? DO I STILL NEED THIS?
+//{
+//	table->ptr_to_UserInterface = this;
+//}
 
 void UserInterface::show()
 {
-	m_btn_start->callback((Fl_Callback*)cb_btn_start_callback, this);
-	m_btn_stop->callback((Fl_Callback*)cb_btn_stop_callback, this);
+	//m_btn_start->callback((Fl_Callback*)cb_btn_start_callback, this);
+	//m_btn_stop->callback((Fl_Callback*)cb_btn_stop_callback, this);
 	m_win_timer->show();
+	window2->show();
 }
 
 void UserInterface::cb_btn_start_callback(Fl_Widget* btn, void* userdata)
@@ -167,13 +169,13 @@ void WidgetTable::button_cb(Fl_Widget *w, void * p)
 	UserInterface * myUserInterface = static_cast<UserInterface*>(myTable->ptr_to_UserInterface);		//UserInterface * myUserInterface = (UserInterface*)(myTable->ptr_to_UserInterface);
 
 	int  myRow = 0, myColumn = 0;
-	double myValue = myUserInterface->m_value_1->value();
+//	double myValue = myUserInterface->m_value_1->value();
 
-	myRow = (int)myUserInterface->m_value_2->value();
-	myColumn = (int)myUserInterface->m_value_3->value();
+//	myRow = (int)myUserInterface->m_value_2->value();
+//	myColumn = (int)myUserInterface->m_value_3->value();
 	
 	std::stringstream buffer;
-	buffer << myValue;
+	//buffer << myValue;
 
 	Fl_Widget * myWidget = myTable->GetElement(myRow, myColumn);
 	Fl_Input * myCell = dynamic_cast<Fl_Input*>(myWidget);
@@ -183,14 +185,52 @@ void WidgetTable::button_cb(Fl_Widget *w, void * p)
 	myCell = dynamic_cast<Fl_Input*>(myWidget);
 	myCell->value(buffer.str().c_str());
 
-	myUserInterface->textBuffer->text("michael");
+	myUserInterface->textDisplayString << "button pressed" << std::endl;
+	myUserInterface->textBuffer->text((myUserInterface->textDisplayString).str().c_str());
 		//text->buffer(myInterface->textBuffer);	
 	//myUserInterface->textBuffer->text("callback run\n");	//pushing text to textBuffer to display in fl_text_Display
 }
 
-Fl_Widget * WidgetTable::GetElement(int nRow, int nCol)
+Fl_Widget * WidgetTable::GetElement(int nRow, int nCol)	//used to get a pointer to an element of WidgetTable with X Y coordinates nRow nCol
 {
 	int numCol = this->cols();
 	int nIndex = nRow * numCol + nCol;
 	return this->child(nIndex);
+}
+
+void WidgetTable::SetSize(int newrows, int newcols, WidgetTable * mytable)
+{
+	rows(newrows);
+	cols(newcols);
+	begin();		// start adding widgets to group
+	{
+		for (int r = 0; r<newrows; r++)
+		{
+			for (int c = 0; c<newcols; c++)
+			{
+				int X, Y, W, H;
+				find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
+
+				char s[40];
+				if (1/*c != 0*/) //this used to be ( c & 1) -bitwise comparison
+				{
+					// Create the input widgets
+					//sprintf(s, "%d.%d", r, c);
+					Fl_Input *in = new Fl_Input(X, Y, W, H);
+					//in->value(s);
+				}
+				else
+				{
+					// Create the light buttons
+					sprintf(s, "%d/%d ", r, c);
+					Fl_Light_Button *butt = new Fl_Light_Button(X, Y, W, H, strdup(s));
+					butt->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
+					butt->callback(button_cb, (void*)mytable);
+					butt->value(((r + c * 2) & 4) ? 1 : 0);
+				}
+			}
+		}
+	}
+	end();
+
 }

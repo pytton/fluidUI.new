@@ -64,20 +64,21 @@ void OnStartClick(Fl_Widget * button, void * pVoid)
 
 	(pPrice->bid);
 
-	Fl_Button *pButton = (Fl_Button *)button;	// all FLTK objects are derived from class Fl_Widget.
-												// here, we are casting the pointer button of type Fl_Widget to 
-												// a pointer of class Fl_Button
-												// button was pointing to the button that calls this function
-												/*
-												if (strcmp(pButton->label(),"Clicked") == 0)
-												{
-												pButton->label("again");
-												}
-												else
-												{
-												pButton->label("Clicked");
-												}
-												*/
+	Fl_Button *pButton = (Fl_Button *)button;	
+	// all FLTK objects are derived from class Fl_Widget.
+	// here, we are casting the pointer button of type Fl_Widget to 
+	// a pointer of class Fl_Button
+	// button was pointing to the button that calls this function
+	/*
+	if (strcmp(pButton->label(),"Clicked") == 0)
+	{
+	pButton->label("again");
+	}
+	else
+	{
+	pButton->label("Clicked");
+	}
+	*/
 
 	pButton->label("mine!");
 }
