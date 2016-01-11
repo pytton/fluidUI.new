@@ -3,9 +3,9 @@
 #include "FluidInterface.h"
 
 FluidInterface::FluidInterface() {
-  { m_win_timer = new Fl_Double_Window(1067, 552);
-    m_win_timer->user_data((void*)(this));
-    { m_btn_load_data = new Fl_Button(15, 205, 75, 55, "Load historical data");
+  { m_window1 = new Fl_Double_Window(1051, 536, "window1");
+    m_window1->user_data((void*)(this));
+    { m_btn_load_data = new Fl_Button(10, 295, 75, 55, "Load historical data");
       m_btn_load_data->align(Fl_Align(FL_ALIGN_WRAP));
     } // Fl_Button* m_btn_load_data
     { m_slider_one = new Fl_Slider(285, 15, 35, 490, "mySlider");
@@ -34,17 +34,23 @@ FluidInterface::FluidInterface() {
     } // Fl_Button* m_btn_up
     { m_btn_down = new Fl_Button(200, 70, 65, 40, "Down");
     } // Fl_Button* m_btn_down
-    { m_btn_next = new Fl_Button(105, 205, 80, 55, "Next");
+    { m_btn_next = new Fl_Button(105, 295, 80, 55, "Next");
     } // Fl_Button* m_btn_next
-    { m_btn_initAlgo = new Fl_Button(15, 285, 80, 55, "Initialize Algo");
+    { m_btn_initAlgo = new Fl_Button(10, 360, 80, 55, "Initialize Algo");
       m_btn_initAlgo->align(Fl_Align(FL_ALIGN_WRAP));
     } // Fl_Button* m_btn_initAlgo
-    m_win_timer->end();
-  } // Fl_Double_Window* m_win_timer
-  { window2 = new Fl_Double_Window(262, 298, "window2");
-    window2->user_data((void*)(this));
+    { m_set_startBid = new Fl_Button(5, 15, 40, 20, "Set");
+    } // Fl_Button* m_set_startBid
+    { m_set_topLimit = new Fl_Button(5, 90, 40, 20, "Set");
+    } // Fl_Button* m_set_topLimit
+    { m_set_btmLimit = new Fl_Button(5, 115, 40, 20, "Set");
+    } // Fl_Button* m_set_btmLimit
+    m_window1->end();
+  } // Fl_Double_Window* m_window1
+  { m_window2 = new Fl_Double_Window(246, 282, "window2");
+    m_window2->user_data((void*)(this));
     { text_display = new Fl_Text_Display(25, 25, 225, 255, "text");
     } // Fl_Text_Display* text_display
-    window2->end();
-  } // Fl_Double_Window* window2
+    m_window2->end();
+  } // Fl_Double_Window* m_window2
 }

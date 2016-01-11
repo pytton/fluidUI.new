@@ -1,16 +1,107 @@
-﻿Build started 12/30/2015 08:26:53.
-     1>Project "C:\Users\Michael\Code\fluidUI\TradingAlgo1.vcxproj" on node 2 (Build target(s)).
+﻿Build started 1/11/2016 15:46:42.
+     1>Project "C:\Users\Michael\Code\fluidUI.new\TradingAlgo1.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (fluidUI.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt UserInterface.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt Control.cpp Data.cpp Display.cpp FLUID\FluidInterface.cxx Pointers.cpp UserInterface.cpp
          UserInterface.cpp
+         Pointers.cpp
+         FluidInterface.cxx
+         Display.cpp
+         Data.cpp
+     1>c:\users\michael\code\fluidui.new\data.cpp(213): warning C4018: '<': signed/unsigned mismatch
+     1>c:\users\michael\code\fluidui.new\data.cpp(227): warning C4018: '<': signed/unsigned mismatch
+         Control.cpp
+         Generating Code...
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _CRT_SECURE_NO_WARNINGS /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michael\Code\fluidUI\Debug\fluidUI.exe" /INCREMENTAL /NOLOGO fltkd.lib wsock32.lib comctl32.lib fltkjpegd.lib fltkimagesd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Michael\Code\fluidUI\Debug\fluidUI.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Michael\Code\fluidUI\Debug\fluidUI.lib" /MACHINE:X86 Debug\Data.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michael\Code\fluidUI.new\Debug\fluidUI.new.exe" /INCREMENTAL /NOLOGO fltkd.lib wsock32.lib comctl32.lib fltkjpegd.lib fltkimagesd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /Debug /PDB:"C:\Users\Michael\Code\fluidUI.new\Debug\fluidUI.new.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Michael\Code\fluidUI.new\Debug\fluidUI.new.lib" /MACHINE:X86 Debug\Control.obj
+         Debug\Data.obj
+         Debug\Display.obj
+         Debug\Pointers.obj
          Debug\UserInterface.obj
          Debug\FluidInterface.obj
          Debug\main.obj
-         TradingAlgo1.vcxproj -> C:\Users\Michael\Code\fluidUI\Debug\fluidUI.exe
-     1>Done Building Project "C:\Users\Michael\Code\fluidUI\TradingAlgo1.vcxproj" (Build target(s)).
+     1>fltkd.lib(case.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(case.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(filename_list.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(filename_list.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(filename_match.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(filename_match.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_abort.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_abort.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_arc.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_arc.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_arci.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_arci.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_ask.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_ask.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Bitmap.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Bitmap.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Box.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Box.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_boxtype.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_boxtype.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Button.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Button.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_color.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_color.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_compose.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_compose.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_cursor.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_cursor.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_curve.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_curve.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Device.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Device.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_dnd.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_dnd.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Double_Window.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Double_Window.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_draw.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_draw.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_draw_image.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_draw_image.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_draw_pixmap.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_draw_pixmap.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_font.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_font.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_get_system_colors.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_get_system_colors.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_grab.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_grab.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Group.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Group.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_gtk.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_gtk.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_gleam.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_gleam.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Image.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Image.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Input.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Input.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Input_.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Input_.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_labeltype.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_labeltype.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_line_style.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_line_style.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_lock.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_lock.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Menu.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Menu.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Menu_.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Menu_.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Menu_add.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Menu_add.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Menu_Button.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Menu_Button.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Menu_Window.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Menu_Window.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Overlay_Window.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Overlay_Window.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Pixmap.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Pixmap.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_plastic.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_plastic.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Preferences.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Preferences.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_read_image.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_read_image.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_rect.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_rect.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Repeat_Button.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Repeat_Button.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Return_Button.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Return_Button.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_round_box.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_round_box.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Scroll.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Scroll.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_scroll_area.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_scroll_area.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Scrollbar.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Scrollbar.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_shortcut.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_shortcut.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Single_Window.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Single_Window.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Slider.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Slider.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_symbols.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_symbols.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Table.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Table.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Table_Row.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Table_Row.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Text_Buffer.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Text_Buffer.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Text_Display.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Text_Display.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Tiled_Image.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Tiled_Image.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Tooltip.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Tooltip.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_utf.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_utf.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_utf8.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_utf8.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Valuator.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Valuator.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Value_Input.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Value_Input.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(fl_vertex.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(fl_vertex.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Widget.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Widget.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Window.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Window.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Window_fullscreen.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Window_fullscreen.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Window_hotspot.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Window_hotspot.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(Fl_Window_shape.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(Fl_Window_shape.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(flstring.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(flstring.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(is_spacing.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(is_spacing.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(numericsort.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(numericsort.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(scandir.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(scandir.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(screen_xywh.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(screen_xywh.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+     1>fltkd.lib(vsnprintf.obj) : warning LNK4099: PDB 'fltk.pdb' was not found with 'fltkd.lib(vsnprintf.obj)' or at 'C:\Users\Michael\Code\fluidUI.new\Debug\fltk.pdb'; linking object as if no debug info
+         TradingAlgo1.vcxproj -> C:\Users\Michael\Code\fluidUI.new\Debug\fluidUI.new.exe
+     1>Done Building Project "C:\Users\Michael\Code\fluidUI.new\TradingAlgo1.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.64
+Time Elapsed 00:00:10.92

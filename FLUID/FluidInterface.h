@@ -13,7 +13,7 @@
 class FluidInterface {
 public:
   FluidInterface();
-  Fl_Double_Window *m_win_timer;
+  Fl_Double_Window *m_window1;
   Fl_Button *m_btn_load_data;
   Fl_Slider *m_slider_one;
   Fl_Value_Input *m_starting_bid;
@@ -28,7 +28,10 @@ public:
   Fl_Button *m_btn_down;
   Fl_Button *m_btn_next;
   Fl_Button *m_btn_initAlgo;
-  Fl_Double_Window *window2;
+  Fl_Button *m_set_startBid;
+  Fl_Button *m_set_topLimit;
+  Fl_Button *m_set_btmLimit;
+  Fl_Double_Window *m_window2;
   Fl_Text_Display *text_display;
 };
 #endif

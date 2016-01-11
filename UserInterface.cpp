@@ -1,97 +1,130 @@
 #include <sstream> //replaces cout
 #include <string>
 #include "UserInterface.h"
+#include "Pointers.h"
 
-const double UserInterface::TIMER_TIMEOUT = 1.0;
+class Pointers;
+class Control;
 
-//Fl_Text_Buffer * UserInterface::textBuffer;
-//Fl_Text_Display * UserInterface::text;
-
-UserInterface::UserInterface()	//constructor
+UserInterface::UserInterface(/*Pointers *p*/)	//constructor
 {
 	
-	m_is_animated = false;	m_count = 0;	//used by youtube functions for timeout demo
-	
-	//m_value_1->value(1);	//setting the 5 input window values
-	//m_value_2->value(1);
-	//m_value_3->value(1);
-	//m_value_4->value(1);
-	//m_value_5->value(1);
-
-	//m_value_1->label("Enter value:");
-	//m_value_2->label("Row:");
-	//m_value_3->label("Column:");
-
 	//add remove elements below:
-	m_win_timer->begin();
+	m_window1->begin();
 	delete m_table;
 	WidgetTable * table = new WidgetTable(350, 15, 685, 495, "widgettable");	//size and location of table
 
 //setting up the textdisplay with textbuffer:
 	textBuffer = new Fl_Text_Buffer();
-	//text = new Fl_Text_Display(205, 210, 475, 160, "text");
 	text_display->buffer(textBuffer);
 
-
+	
 
 //below just playing with creating new widgets outside of fluid:
 //	Fl_Button* m_myExtraBtn = new Fl_Button(125, 125, 65, 40, "Extra");
-	m_win_timer->end();
+	m_window1->end();
 
 //creting cells inside table:
 	table->ptr_to_UserInterface = this;	//tells WidgetTable the location of Userinterface - for callbacks in WidgetTable
 	table->SetSize(100, 25, table);		//this needs to be called to construct all the cells of WidgetTable
 }
 
-//void UserInterface::setptr()		//OLD CODE?? DO I STILL NEED THIS?
-//{
-//	table->ptr_to_UserInterface = this;
-//}
-
 void UserInterface::show()
 {
 	//m_btn_start->callback((Fl_Callback*)cb_btn_start_callback, this);
 	//m_btn_stop->callback((Fl_Callback*)cb_btn_stop_callback, this);
-	m_win_timer->show();
-	window2->show();
+	m_window1->show();
+	m_window2->show();
 }
 
-void UserInterface::cb_btn_start_callback(Fl_Widget* btn, void* userdata)
+void WidgetTable::button_cb(Fl_Widget *w, void * p)
 {
-	UserInterface* window = (UserInterface*)userdata;
-	window->m_win_timer->label("start"); //set window title
-	window->m_is_animated = true;
-	Fl::add_timeout(/*TIMER_TIMEOUT*/ UserInterface::TIMER_TIMEOUT, timer_event, window);
-}
+	fprintf(stderr, "BUTTON: %s\n", (const char*)w->label());
 
-void UserInterface::cb_btn_stop_callback(Fl_Widget* btn, void* userdata)
-{
-	UserInterface* window = (UserInterface*)userdata;
-	window->m_is_animated = false;
-	window->m_win_timer->label("stop");
-}
 
-void UserInterface::timer_event(void* userdata)
-{
-	UserInterface* window = (UserInterface*)userdata;
+
+	WidgetTable * myTable = static_cast<WidgetTable*>(p);		//WidgetTable * myTable = (WidgetTable*)(p);
+	UserInterface * myUserInterface = static_cast<UserInterface*>(myTable->ptr_to_UserInterface);		//UserInterface * myUserInterface = (UserInterface*)(myTable->ptr_to_UserInterface);
+
+	int  myRow = 0, myColumn = 0;
 	
-	if (window->m_is_animated)
+	//std::stringstream buffer;
+
+
+	Fl_Widget * myWidget = myTable->GetElement(myRow, myColumn);
+	Fl_Input * myCell = dynamic_cast<Fl_Input*>(myWidget);
+
+	myWidget = myTable->GetElement(myRow, myColumn);
+	
+	My_fl_button * myFlButton = (My_fl_button*)w;
+
+	std::cout << std::endl << myFlButton->x_pos << std::endl;
+	std::cout << myFlButton->y_pos << std::endl;
+
+	myCell = dynamic_cast<Fl_Input*>(myWidget);
+
+	myUserInterface->textDisplayString << "button pressed" << std::endl;
+	myUserInterface->textBuffer->text((myUserInterface->textDisplayString).str().c_str());
+}
+
+Fl_Widget * WidgetTable::GetElement(int nRow, int nCol)	//used to get a pointer to an element of WidgetTable with X Y coordinates nRow nCol
+{
+	int numCol = this->cols();
+	int nIndex = nRow * numCol + nCol;
+	return this->child(nIndex);
+}
+
+//below fills the table with objects:
+void WidgetTable::SetSize(int newrows, int newcols, WidgetTable * mytable)
+{
+	rows(newrows);
+	cols(newcols);
+	begin();		// start adding widgets to group
 	{
-		++window->m_count;
-		std::stringstream buffer;
-		buffer << window->m_count;
-		//buffer.str(); // .str() convert what's in buffer to string
-		//buffer.str().c_str(); // .c_str() converts std::string to char*
-		window->m_win_timer->label(buffer.str().c_str() );
-		Fl::add_timeout(/*TIMER_TIMEOUT*/1.0, timer_event, window);
+		for (int r = 0; r<newrows; r++)
+		{
+			for (int c = 0; c<newcols; c++)
+			{
+				int X, Y, W, H;
+				find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
+				char s[40];
+				//below decides what is put into table:
+				//r is row and c is col
+				if (c != 0 && c != 1 && c != 2 && c != 3) //this used to be ( c & 1) -bitwise comparison				
+				{
+					// Create the input widgets
+					//sprintf(s, "%d.%d", r, c);
+					Fl_Input *in = new Fl_Input(X, Y, W, H);
+					//in->value(s);
+				}
+				else 
+				{
+					// Create the light buttons
+					sprintf(s, "%d/%d ", r, c);
+					My_fl_button *butt = new My_fl_button(X, Y, W, H, strdup(s));
+					//Fl_Light_Button *butt = new Fl_Light_Button(X, Y, W, H, strdup(s));
+					butt->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
+					butt->callback(button_cb, (void*)mytable);
+					//butt->value(((r + c * 2) & 4) ? 1 : 0);	//this sets the light on or off for Fl_Light_Button
+					if (c == 0) butt->label("B LMT");
+					if (c == 1) butt->label("B STP");
+					if (c == 2) butt->label("S LMT");
+					if (c == 3) butt->label("S STP");
+					butt->x_pos = c;
+					butt->y_pos = r;
+				}
+
+			}
+		}
 	}
+	end();
+
 }
 
 WidgetTable::WidgetTable(int x, int y, int w, int h, const char *l = 0) : Fl_Table_Row(x, y, w, h, l)
 {
-	
 	table_rows, table_cols = 20;
-	col_header(0);
+	col_header(1);
 	col_resize(0);
 	col_header_height(20);
 
@@ -108,7 +141,7 @@ void WidgetTable::draw_cell(TableContext context,
 	{
 	case CONTEXT_STARTPAGE:
 		fl_font(FL_HELVETICA, 12);		// font used by all headers
-		col_width_all(40);				// sets the width of the columns
+		col_width_all(50);				// sets the width of the columns
 		break;
 
 	case CONTEXT_RC_RESIZE:
@@ -160,77 +193,44 @@ void WidgetTable::draw_cell(TableContext context,
 	}
 }
 
-void WidgetTable::button_cb(Fl_Widget *w, void * p)
-{
-	fprintf(stderr, "BUTTON: %s\n", (const char*)w->label());
-	//Fl_Light_Button * pBtn = dynamic_cast<Fl_Light_Button*> (w);
-	
-	WidgetTable * myTable = static_cast<WidgetTable*>(p);		//WidgetTable * myTable = (WidgetTable*)(p);
-	UserInterface * myUserInterface = static_cast<UserInterface*>(myTable->ptr_to_UserInterface);		//UserInterface * myUserInterface = (UserInterface*)(myTable->ptr_to_UserInterface);
 
-	int  myRow = 0, myColumn = 0;
-//	double myValue = myUserInterface->m_value_1->value();
+//const double UserInterface::TIMER_TIMEOUT = 1.0;
 
-//	myRow = (int)myUserInterface->m_value_2->value();
-//	myColumn = (int)myUserInterface->m_value_3->value();
-	
-	std::stringstream buffer;
-	//buffer << myValue;
+//Fl_Text_Buffer * UserInterface::textBuffer;
+//Fl_Text_Display * UserInterface::text;
 
-	Fl_Widget * myWidget = myTable->GetElement(myRow, myColumn);
-	Fl_Input * myCell = dynamic_cast<Fl_Input*>(myWidget);
+//void UserInterface::setptr()		//OLD CODE?? DO I STILL NEED THIS?
+//{
+//	table->ptr_to_UserInterface = this;
+//}
 
-	myWidget = myTable->GetElement(myRow, myColumn);
-		
-	myCell = dynamic_cast<Fl_Input*>(myWidget);
-	myCell->value(buffer.str().c_str());
+//void UserInterface::cb_btn_start_callback(Fl_Widget* btn, void* userdata)
+//{
+//	UserInterface* window = (UserInterface*)userdata;
+//	window->m_window1->label("start"); //set window title
+//	window->m_is_animated = true;
+//	Fl::add_timeout(/*TIMER_TIMEOUT*/ UserInterface::TIMER_TIMEOUT, timer_event, window);
+//}
 
-	myUserInterface->textDisplayString << "button pressed" << std::endl;
-	myUserInterface->textBuffer->text((myUserInterface->textDisplayString).str().c_str());
-		//text->buffer(myInterface->textBuffer);	
-	//myUserInterface->textBuffer->text("callback run\n");	//pushing text to textBuffer to display in fl_text_Display
-}
+//void UserInterface::cb_btn_stop_callback(Fl_Widget* btn, void* userdata)
+//{
+//	UserInterface* window = (UserInterface*)userdata;
+//	window->m_is_animated = false;
+//	window->m_window1->label("stop");
+//}
 
-Fl_Widget * WidgetTable::GetElement(int nRow, int nCol)	//used to get a pointer to an element of WidgetTable with X Y coordinates nRow nCol
-{
-	int numCol = this->cols();
-	int nIndex = nRow * numCol + nCol;
-	return this->child(nIndex);
-}
-
-void WidgetTable::SetSize(int newrows, int newcols, WidgetTable * mytable)
-{
-	rows(newrows);
-	cols(newcols);
-	begin();		// start adding widgets to group
-	{
-		for (int r = 0; r<newrows; r++)
-		{
-			for (int c = 0; c<newcols; c++)
-			{
-				int X, Y, W, H;
-				find_cell(CONTEXT_TABLE, r, c, X, Y, W, H);
-
-				char s[40];
-				if (1/*c != 0*/) //this used to be ( c & 1) -bitwise comparison
-				{
-					// Create the input widgets
-					//sprintf(s, "%d.%d", r, c);
-					Fl_Input *in = new Fl_Input(X, Y, W, H);
-					//in->value(s);
-				}
-				else
-				{
-					// Create the light buttons
-					sprintf(s, "%d/%d ", r, c);
-					Fl_Light_Button *butt = new Fl_Light_Button(X, Y, W, H, strdup(s));
-					butt->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
-					butt->callback(button_cb, (void*)mytable);
-					butt->value(((r + c * 2) & 4) ? 1 : 0);
-				}
-			}
-		}
-	}
-	end();
-
-}
+//void UserInterface::timer_event(void* userdata)
+//{
+//	UserInterface* window = (UserInterface*)userdata;
+//	
+//	if (window->m_is_animated)
+//	{
+//		++window->m_count;
+//		std::stringstream buffer;
+//		buffer << window->m_count;
+//		//buffer.str(); // .str() convert what's in buffer to string
+//		//buffer.str().c_str(); // .c_str() converts std::string to char*
+//		window->m_window1->label(buffer.str().c_str() );
+//		Fl::add_timeout(/*TIMER_TIMEOUT*/1.0, timer_event, window);
+//	}
+//}

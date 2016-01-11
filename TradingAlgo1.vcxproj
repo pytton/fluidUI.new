@@ -22,7 +22,7 @@
     <ProjectGuid>{E37299F4-9F31-4641-98B7-4EEE53301711}</ProjectGuid>
     <RootNamespace>TradingAlgo1</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>fluidUI</ProjectName>
+    <ProjectName>fluidUI.new</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,7 +124,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Control.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Display.cpp" />
+    <ClCompile Include="Pointers.cpp" />
     <ClCompile Include="UserInterface.cpp" />
     <ClCompile Include="FLUID\FluidInterface.cxx" />
     <ClCompile Include="main.cpp">
@@ -138,6 +141,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Control.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="Display.h" />
     <ClInclude Include="FLUID\FluidInterface.h" />
     <ClInclude Include="MktSnapshot.h" />
     <ClInclude Include="Pointers.h" />

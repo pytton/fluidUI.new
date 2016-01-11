@@ -1,7 +1,9 @@
-#include "Pointers.h"
-
+//#include "Pointers.h"
+#include "Data.h"
+//#include "Display.h"
+//
 #include "MktSnapshot.h"	//for Price and MktSnapshot
-
+//
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -10,6 +12,11 @@
 //forward function declarations:
 long StringToLong(std::string Input);
 
+class Data;
+class Control;
+class Pointers;
+
+Pointers Data::myStaticPointers(0, 0, 0);
 
 //below function loads prices stored in a file to memory
 void Data::MktSnapshot(/*std::vector<MktSnap> & data*/) //this function loads prices stored in a file to memory
@@ -176,7 +183,7 @@ void Data::MktSnapshot(/*std::vector<MktSnap> & data*/) //this function loads pr
 				counter = 0;
 			}
 
-			progressCtr++;
+			progressCtr++;	//for displaying progress of loading into memory
 			if (progressCtr % 250000 == 0) { std::cout << endl << progressCtr << endl; }
 		} while (!file.eof());	//stay in loop until end of file is reached
 		cout << endl << endl << endl << endl << "output string follows: " << endl;
@@ -235,8 +242,6 @@ void Data::MktSnapshot(/*std::vector<MktSnap> & data*/) //this function loads pr
 		}
 	}
 }
-
-
 
 void Data::LiveData() 
 {

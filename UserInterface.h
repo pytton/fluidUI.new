@@ -2,6 +2,7 @@
 #define _UserInterface_H_INCLUDED_
 
 #include "FLUID/FluidInterface.h"
+#include "Pointers.h"
 
 #include <iostream>
 #include <sstream>
@@ -15,15 +16,16 @@
 #include <FL/Fl_Table_Row.H>
 #include <FL/Fl_Text_Display.H>
 
+
 //const double TIMER_TIMEOUT = 1.0; // 1 sec
 class WidgetTable;	//forward declaration
 
+
 class UserInterface : public FluidInterface
 {
-public:	
-	static const double TIMER_TIMEOUT;// = 1.0; used for callback from Youtube video
-	bool m_is_animated;
-	int m_count;
+public:
+	class Pointers;
+	Pointers *pointers;
 	WidgetTable *table;		
 	//this replaces regular Fl_Table with my custom one
 	
@@ -32,14 +34,11 @@ public:
 	std::stringstream textDisplayString;
 
 	//constructors/destructor
-	UserInterface();
+	UserInterface(/*Pointers *p*/);
 	void show();
 	
 	//callback functions
-	static void cb_btn_start_callback(Fl_Widget* btn, void* userdata);	//from youtube video - timeout feature demo
-	static void cb_btn_stop_callback(Fl_Widget* btn, void* userdata);	//form youtube
-	static void timer_event(void* userdata);							//from youtube - timeout
-	//void setptr();	//OLD CODE? DO I STILL NEED THIS?
+
 };
 
 class WidgetTable : public Fl_Table_Row		//WigetTable - table with cells drawed inside it
@@ -64,6 +63,23 @@ public:
 	
 	//the below function fills the table with cells:
 	void SetSize(int newrows, int newcols, WidgetTable * mytable);
+};
+
+class My_fl_button : public Fl_Button  //with location of button in Fl_Table
+{
+public:
+	//below determines where in the Fl_Table the button is located
+	//needs to be set inside WidgetTable::SetSize function
+	int x_pos;
+	int y_pos;
+
+	//constructor:
+	My_fl_button(int x, int y, int w, int h, const char *l = 0)
+		: Fl_Button(x, y,  w,  h, l ), x_pos(0), y_pos(0)
+	{
+		//x_pos = 0;
+		//y_pos = 0;
+	}
 };
 
 

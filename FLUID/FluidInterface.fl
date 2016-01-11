@@ -6,12 +6,13 @@ class FluidInterface {open
 } {
   Function {FluidInterface()} {open
   } {
-    Fl_Window m_win_timer {open selected
-      xywh {356 349 1067 552} type Double visible
+    Fl_Window m_window1 {
+      label window1 open
+      xywh {357 210 1051 536} type Double visible
     } {
       Fl_Button m_btn_load_data {
         label {Load historical data}
-        xywh {15 205 75 55} align 128
+        xywh {10 295 75 55} align 128
       }
       Fl_Slider m_slider_one {
         label mySlider
@@ -57,17 +58,29 @@ class FluidInterface {open
         xywh {200 70 65 40}
       }
       Fl_Button m_btn_next {
-        label Next
-        xywh {105 205 80 55}
+        label Next selected
+        xywh {105 295 80 55}
       }
       Fl_Button m_btn_initAlgo {
         label {Initialize Algo}
-        xywh {15 285 80 55} align 128
+        xywh {10 360 80 55} align 128
+      }
+      Fl_Button m_set_startBid {
+        label Set
+        xywh {5 15 40 20}
+      }
+      Fl_Button m_set_topLimit {
+        label Set
+        xywh {5 90 40 20}
+      }
+      Fl_Button m_set_btmLimit {
+        label Set
+        xywh {5 115 40 20}
       }
     }
-    Fl_Window window2 {
+    Fl_Window m_window2 {
       label window2 open
-      xywh {1486 198 262 298} type Double visible
+      xywh {1108 206 246 282} type Double visible
     } {
       Fl_Text_Display text_display {
         label text
