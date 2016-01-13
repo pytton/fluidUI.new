@@ -20,6 +20,7 @@
 //const double TIMER_TIMEOUT = 1.0; // 1 sec
 class WidgetTable;	//forward declaration
 class Pointers;
+class Display;
 
 class UserInterface : public FluidInterface
 {public:
@@ -27,7 +28,9 @@ class UserInterface : public FluidInterface
 	static Pointers StaticPointers;
 
 //	class Pointers;
+	Display * ptr_t_display;
 	Pointers *pointers2;
+	//Pointers & refToPointers;
 	WidgetTable *table;		//this replaces regular Fl_Table with my custom one
 	
 	int myint;
@@ -36,12 +39,14 @@ class UserInterface : public FluidInterface
 	std::stringstream textDisplayString;
 
 	//constructors/destructor
+	
+	UserInterface(Display*p);
 	UserInterface(Pointers p);
 	UserInterface(/*Pointers *p*/);
 	void show();
 	
 	//callback functions
-	static void experimental2_cb(Fl_Widget *w);
+	static void experimental2_cb(Fl_Widget *w, void * p);
 	static void experimental_cb(Fl_Widget *w, void * p);
 	
 	//helper functions

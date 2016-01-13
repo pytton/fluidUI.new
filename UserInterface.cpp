@@ -9,7 +9,7 @@ extern Pointers pointers3;
 
 UserInterface::UserInterface()	//constructor
 {
-	
+	//refToPointers = pointers3;
 	//add remove elements below:
 	m_window1->begin();
 	delete m_table;
@@ -55,6 +55,30 @@ UserInterface::UserInterface(Pointers p)	//constructor
 	m_btn_next->callback(experimental_cb, table);
 }
 
+UserInterface::UserInterface(Display*p)
+{
+	ptr_t_display = p;
+	//add remove elements below:
+	m_window1->begin();
+	delete m_table;
+	WidgetTable * table = new WidgetTable(350, 15, 685, 495, "widgettable");	//size and location of table
+
+																				//setting up the textdisplay with textbuffer:
+	textBuffer = new Fl_Text_Buffer();
+	text_display->buffer(textBuffer);
+
+	//below just playing with creating new widgets outside of fluid:
+	//	Fl_Button* m_myExtraBtn = new Fl_Button(125, 125, 65, 40, "Extra");
+	m_window1->end();
+	//	m_window1->show();
+	//creting cells inside table:
+	table->ptr_to_UserInterface = this;	//tells WidgetTable the location of Userinterface - for callbacks in WidgetTable
+	table->SetSize(100, 25, table);		//this needs to be called to construct all the cells of WidgetTable
+
+	m_btn_down->callback(experimental2_cb, this);
+	m_btn_next->callback(experimental_cb, table);
+}
+
 void UserInterface::experimental_cb(Fl_Widget *w, void * p)
 {	
 	WidgetTable * myTable =(WidgetTable*) p;
@@ -66,11 +90,25 @@ void UserInterface::experimental_cb(Fl_Widget *w, void * p)
 	myTable->printInTable(row, col, trythis, myTable);
 }
 
-void UserInterface::experimental2_cb(Fl_Widget *w)
+void UserInterface::experimental2_cb(Fl_Widget *w, void*p)
 {
+	//class Control;
+	UserInterface * myUserInterface = (UserInterface*)p;
 
-	Control * myControl = UserInterface::StaticPointers.returnControlPtr();
+	Display * myDisplay = myUserInterface->ptr_t_display;
 
+	
+
+	//pointers2->ptr
+
+
+	//Control * myControl = myDisplay->ptr_t_control;
+
+	//Control  * myControl = (Control*)(UserInterface::StaticPointers.returnControlPtr());
+
+	
+
+	//UserInterface::StaticPointers.ptr_t_control->tryout1();
 
 	//CANNOT GET THE ONE LINE BELOW TO WORK!!!!!!
 	//myControl->tryout1();

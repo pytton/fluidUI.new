@@ -68,21 +68,21 @@ Pointers pointers3;
 //}
 
 //this function ensures classes Display, Data and Control can see each other:
-void setPointers(Pointers pointers)	//this function ensures classes Display, Data and Control can see each other:
+void setPointers(Pointers& pointers)	//this function ensures classes Display, Data and Control can see each other:
 {
 	
-	//set pointers in Display:
-	//pointers.ptr_t_display->ptr_t_control = pointers.ptr_t_control;
-	//pointers.ptr_t_display->ptr_t_data = pointers.ptr_t_data;
-	//pointers->ptr_t_display->pointers = pointers;
-	//set pointers in Data:
-	//pointers->ptr_t_data->ptr_t_control = pointers->ptr_t_control;
-	//pointers->ptr_t_data->ptr_t_display = pointers->ptr_t_display;
-	//pointers->ptr_t_data->pointers = pointers;
-	//set pointers in Control:
-	//pointers->ptr_t_control->ptr_t_data = pointers->ptr_t_data;
-	//pointers->ptr_t_control->ptr_t_display = pointers->ptr_t_display;
-	//pointers->ptr_t_control->pointers = pointers;
+//	set pointers in Display:
+	pointers.ptr_t_display->ptr_t_control = pointers.ptr_t_control;
+	pointers.ptr_t_display->ptr_t_data = pointers.ptr_t_data;
+//	pointers.ptr_t_display->pointers = pointers;
+//	set pointers in Data:
+	pointers.ptr_t_data->ptr_t_control = pointers.ptr_t_control;
+	pointers.ptr_t_data->ptr_t_display = pointers.ptr_t_display;
+//	pointers.ptr_t_data->pointers = pointers;
+//	set pointers in Control:
+	pointers.ptr_t_control->ptr_t_data = pointers.ptr_t_data;
+	pointers.ptr_t_control->ptr_t_display = pointers.ptr_t_display;
+	pointers.ptr_t_control->pointers = pointers;
 
 	Control::StaticPointers = pointers;
 	Data::StaticPointers = pointers;
@@ -112,13 +112,13 @@ int main()
 	//below constructs Control, Data, Display - setting them with the right, now existing, pointers!
 	control->construct(pointers);
 	data->construct(pointers);
-	//display->construct(pointers);
+	display->construct(pointers);
+
+//	display->window->m_btn_up->callback(UserInterface::experimental2_cb, (void*)(&pointers));
+	//pointers.ptr_t_control->tryout1();
 
 
-	pointers.ptr_t_control->tryout1();
-
-
-
+	//display->window->table->printInTable(7, 7, "from Main", display->window->table);
 
 	
 	return Fl::run();

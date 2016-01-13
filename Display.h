@@ -16,13 +16,17 @@ class Pointers;
 class Display	//stores all user input/output activities
 {
 public:
+	Control * ptr_t_control;
+	Data * ptr_t_data;
+//	Display * ptr_t_display;
+
 	static Pointers  StaticPointers;
 
 	UserInterface * window;
 
 	//constructor
 	Display();
-	//void construct(Pointers pointers);
+	void construct(Pointers pointers);
 };
 
 

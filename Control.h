@@ -23,6 +23,10 @@ public:
 	static Pointers  StaticPointers;
 	Pointers pointers;
 
+//	Control * ptr_t_control;
+	Data * ptr_t_data;
+	Display * ptr_t_display;
+
 	//constructor:
 	Control();	//called first
 	void construct(Pointers pointers);	//this must be run from outside to initialize class with correct pointers!
