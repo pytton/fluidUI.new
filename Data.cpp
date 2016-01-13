@@ -16,7 +16,14 @@ class Data;
 class Control;
 class Pointers;
 
-Pointers Data::myStaticPointers(0, 0, 0);
+Pointers Data::StaticPointers(0, 0, 0);
+
+Data::Data(){}
+
+void Data::construct(Pointers pointers)
+{
+	//put all constructors here
+}
 
 //below function loads prices stored in a file to memory
 void Data::MktSnapshot(/*std::vector<MktSnap> & data*/) //this function loads prices stored in a file to memory

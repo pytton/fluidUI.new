@@ -57,7 +57,7 @@ Algo - make decisions here (one algo? more algos?)
 
 */
 
-
+Pointers pointers3;
 
 //int launch(Pointers  * pointers)
 //{
@@ -84,7 +84,10 @@ void setPointers(Pointers pointers)	//this function ensures classes Display, Dat
 	//pointers->ptr_t_control->ptr_t_display = pointers->ptr_t_display;
 	//pointers->ptr_t_control->pointers = pointers;
 
+	Control::StaticPointers = pointers;
+	Data::StaticPointers = pointers;
 	Display::StaticPointers = pointers;
+	UserInterface::StaticPointers = pointers;
 
 }
 
@@ -94,26 +97,32 @@ int main()
 {
 	//problem - make sure all three classes can communicate between each other
 	//create three main parts of the program:
-	Display * display = new Display;
-	Data * data = new Data;
 	Control * control = new Control;
-	
+	Data * data = new Data;
+	Display * display = new Display;
 	Pointers pointers;	//this enables easy communication between three classes
 	pointers.initPointers(control, data, display);	//initialize pointers inside Pointers class
 	setPointers(pointers);	//set pointers inside Display, Data and Control classes
 	
-	Pointers staticPointersTry(0, 0, 0);
-//	static Pointers::myStaticPointers = pointers;
-	//pointers->ptr_t_display->window->show();
-	display->window->show();
+	pointers3 = pointers;
 
-//	Control::myStaticPointers(control, data, display);
-	//Pointers Display::StaticPointers = pointers;
+
+
+
+	//below constructs Control, Data, Display - setting them with the right, now existing, pointers!
+	control->construct(pointers);
+	data->construct(pointers);
+	//display->construct(pointers);
+
+
+	pointers.ptr_t_control->tryout1();
+
+
+
+
 	
-	Display::mystaticint = 5;
-	
-	//display->StaticPointers.initPointers(display, data, control);
-
-
 	return Fl::run();
+
+
+
 }

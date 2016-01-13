@@ -19,11 +19,12 @@ class Pointers;
 class Data	//stores all data used by program
 {	//put all marketdata here
 public:
-	static Pointers myStaticPointers;
-	Display * ptr_t_display;	//this needs to be set from outside by Pointer class
-	Control * ptr_t_control;	//used for communication 
-
+	static Pointers StaticPointers;
 	std::vector<MktSnap>  histSavedData;	//holds historical data saved in a file called "Sample2.txt"
+
+	//constructors:
+	Data();
+	void construct(Pointers pointers);
 
 	//member functions:
 

@@ -19,50 +19,59 @@
 
 //const double TIMER_TIMEOUT = 1.0; // 1 sec
 class WidgetTable;	//forward declaration
-
+class Pointers;
 
 class UserInterface : public FluidInterface
-{
-public:
-	class Pointers;
-	Pointers *pointers;
-	WidgetTable *table;		
-	//this replaces regular Fl_Table with my custom one
+{public:
 	
+	static Pointers StaticPointers;
+
+//	class Pointers;
+	Pointers *pointers2;
+	WidgetTable *table;		//this replaces regular Fl_Table with my custom one
+	
+	int myint;
 	Fl_Text_Buffer * textBuffer;
 	Fl_Text_Display * text;
 	std::stringstream textDisplayString;
 
 	//constructors/destructor
+	UserInterface(Pointers p);
 	UserInterface(/*Pointers *p*/);
 	void show();
 	
 	//callback functions
+	static void experimental2_cb(Fl_Widget *w);
+	static void experimental_cb(Fl_Widget *w, void * p);
+	
+	//helper functions
+	
 
 };
 
 class WidgetTable : public Fl_Table_Row		//WigetTable - table with cells drawed inside it
-{
-protected:
+{protected:
 	void draw_cell(TableContext context,  		// table cell drawing
 		int R = 0, int C = 0, int X = 0, int Y = 0, int W = 0, int H = 0);	//supplied from example - dont know how this works
 	
 public:
-	Fl_Widget * WidgetTable::GetElement(int nRow, int nCol);
-	//returns a pointer to the cell in the table at nRow nCol
-
-	void * ptr_to_UserInterface;	//stores a pointer to window in which table is constructed. null at first. has to be set from outside.
+	UserInterface * ptr_to_UserInterface;	//stores a pointer to window in which table is constructed. null at first. has to be set from outside.
 	int table_rows, table_cols;
 
 	//callbacks:
 	static void button_cb(Fl_Widget *w, void * p);	//callbacks in fltk have to be static
 
+	
 	//constructor:
 	WidgetTable(int x, int y, int w, int h, const char *l);
 	~WidgetTable() { }
 	
 	//the below function fills the table with cells:
 	void SetSize(int newrows, int newcols, WidgetTable * mytable);
+
+	//helper functions:
+	void printInTable(int row, int col, std::string text, WidgetTable * myWidgetPointer);
+	Fl_Widget * GetElement(int nRow, int nCol);	//returns a pointer to the cell in the table at nRow nCol
 };
 
 class My_fl_button : public Fl_Button  //with location of button in Fl_Table

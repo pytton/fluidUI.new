@@ -24,14 +24,17 @@ class Pointers;
 class Pointers	//this is used for communication between three main elements of the program
 {
 public:
-	Display * ptr_t_display;
-	Data * ptr_t_data;
 	Control * ptr_t_control;
-
+	Data * ptr_t_data;
+	Display * ptr_t_display;
+	
+	//consturctors:
 	Pointers();
 	Pointers(Control * c, Data * d, Display * dis);
 
-	void initPointers(Control * control, Data * data, Display * display);
+	void initPointers(Control * control, Data * data, Display * display);	//sets pointers
+
+	Control * returnControlPtr();
 };
 
 //class StaticPointers	//this is used for communication between three main elements of the program

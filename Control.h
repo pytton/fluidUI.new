@@ -19,15 +19,16 @@ class Pointers;
 class Control
 {
 public:
-	//Pointers * pointers;
+	
 	static Pointers  StaticPointers;
-	Display * ptr_t_display;
-	Data * ptr_t_data;
+	Pointers pointers;
 
-	static Pointers myStaticPointers;
-	//empty so far - put algos here?
+	//constructor:
+	Control();	//called first
+	void construct(Pointers pointers);	//this must be run from outside to initialize class with correct pointers!
 
-	static Pointers setStaticPointers(Pointers * p);
+	//member functions:
+	void tryout1();
 
 };
 

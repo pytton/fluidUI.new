@@ -1,12 +1,13 @@
 #include <sstream> //replaces cout
 #include <string>
 #include "UserInterface.h"
-#include "Pointers.h"
 
-class Pointers;
 class Control;
+Pointers UserInterface::StaticPointers(0,0,0);
 
-UserInterface::UserInterface(/*Pointers *p*/)	//constructor
+extern Pointers pointers3;
+
+UserInterface::UserInterface()	//constructor
 {
 	
 	//add remove elements below:
@@ -18,17 +19,97 @@ UserInterface::UserInterface(/*Pointers *p*/)	//constructor
 	textBuffer = new Fl_Text_Buffer();
 	text_display->buffer(textBuffer);
 
-	
-
 //below just playing with creating new widgets outside of fluid:
 //	Fl_Button* m_myExtraBtn = new Fl_Button(125, 125, 65, 40, "Extra");
 	m_window1->end();
-
+//	m_window1->show();
 //creting cells inside table:
 	table->ptr_to_UserInterface = this;	//tells WidgetTable the location of Userinterface - for callbacks in WidgetTable
 	table->SetSize(100, 25, table);		//this needs to be called to construct all the cells of WidgetTable
+
+
+	m_btn_next->callback(experimental_cb, table);
 }
 
+UserInterface::UserInterface(Pointers p)	//constructor
+{
+	pointers2 = &p;
+	UserInterface::StaticPointers = p;
+	//add remove elements below:
+	m_window1->begin();
+	delete m_table;
+	WidgetTable * table = new WidgetTable(350, 15, 685, 495, "widgettable");	//size and location of table
+	//setting up the textdisplay with textbuffer:
+	textBuffer = new Fl_Text_Buffer();
+	text_display->buffer(textBuffer);
+
+	//below just playing with creating new widgets outside of fluid:
+	//	Fl_Button* m_myExtraBtn = new Fl_Button(125, 125, 65, 40, "Extra");
+	m_window1->end();
+	
+	//creting cells inside table:
+	table->ptr_to_UserInterface = this;	//tells WidgetTable the location of Userinterface - for callbacks in WidgetTable
+	table->SetSize(100, 25, table);		//this needs to be called to construct all the cells of WidgetTable
+
+	m_btn_down->callback(experimental2_cb);
+	m_btn_next->callback(experimental_cb, table);
+}
+
+void UserInterface::experimental_cb(Fl_Widget *w, void * p)
+{	
+	WidgetTable * myTable =(WidgetTable*) p;
+
+	std::string trythis = "mess";
+	int row = 15;
+	int col = 8;
+
+	myTable->printInTable(row, col, trythis, myTable);
+}
+
+void UserInterface::experimental2_cb(Fl_Widget *w)
+{
+
+	Control * myControl = UserInterface::StaticPointers.returnControlPtr();
+
+
+	//CANNOT GET THE ONE LINE BELOW TO WORK!!!!!!
+	//myControl->tryout1();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//	pointers3.ptr_t_control->tryout1();
+	
+//	Pointers myPointers = (Pointers*)p;
+//	UserInterface * myInterface = (UserInterface*)p;
+
+//	Control & myControl = UserInterface::StaticPointers.ptr_t_control;
+
+	//myControl->tryout1();
+
+//	myControl->tryout1();
+
+	//std::string trythis = "mess";
+	//int row = 15;
+	//int col = 8;
+
+	//Control *myControl  = myInterface->pointers->ptr_t_control;
+
+	//myControl->tryout1();
+
+}
 void UserInterface::show()
 {
 	//m_btn_start->callback((Fl_Callback*)cb_btn_start_callback, this);
@@ -46,7 +127,7 @@ void WidgetTable::button_cb(Fl_Widget *w, void * p)
 	WidgetTable * myTable = static_cast<WidgetTable*>(p);		//WidgetTable * myTable = (WidgetTable*)(p);
 	UserInterface * myUserInterface = static_cast<UserInterface*>(myTable->ptr_to_UserInterface);		//UserInterface * myUserInterface = (UserInterface*)(myTable->ptr_to_UserInterface);
 
-	int  myRow = 0, myColumn = 0;
+	int  myRow = 8, myColumn = 8;
 	
 	//std::stringstream buffer;
 
@@ -63,8 +144,12 @@ void WidgetTable::button_cb(Fl_Widget *w, void * p)
 
 	myCell = dynamic_cast<Fl_Input*>(myWidget);
 
+	myCell->value("try");
 	myUserInterface->textDisplayString << "button pressed" << std::endl;
 	myUserInterface->textBuffer->text((myUserInterface->textDisplayString).str().c_str());
+
+	myTable->printInTable(6, 6, "text", myTable);
+
 }
 
 Fl_Widget * WidgetTable::GetElement(int nRow, int nCol)	//used to get a pointer to an element of WidgetTable with X Y coordinates nRow nCol
@@ -192,7 +277,90 @@ void WidgetTable::draw_cell(TableContext context,
 		return;
 	}
 }
+//
+//void UserInterface::printInTable(int row, int col, std::string text, UserInterface *p)//this causes trouble
+//{
+//	
+//	UserInterface * myInterface = p;
+//
+//	WidgetTable * myWidgetTable = myInterface->table;
+//
+//	Fl_Widget * myWidget =  myWidgetTable->GetElement(row, col);
+//
+//	Fl_Input * myCell = dynamic_cast<Fl_Input*>(myWidget);
+//
+//	std::stringstream buffer;
+//
+//	buffer << "try";
+////	myCell->value(buffer.str().c_str());
+//
+//	//myCell->value("try");
+//
+//	//Fl_Widget * myWidget = mytable->GetElement(row, col);
+//	
+//	
+//	/*Fl_Input * myTargetCell = 
+//	mytable->GetElement(row, col);*/
+//	
+//	
+//	//Fl_Input  * targetCell = (Fl_Input*)(table->GetElement(row, col));
+//	//std::stringstream buffer;
+//	//buffer << text;
+//
+//	//targetCell->value(buffer.str().c_str());
+//	//targetCell->value("400");
+//}
 
+void WidgetTable::printInTable(int row, int col, std::string text, WidgetTable * myWidgetPointer)//this causes trouble
+{
+	WidgetTable * myTable = myWidgetPointer;
+	Fl_Widget * myWidget = (Fl_Widget*) (myTable->GetElement(row, col));
+	Fl_Input * myCell = (Fl_Input*)(myWidget);
+	std::stringstream buffer;
+	buffer << text;
+	myCell->value(buffer.str().c_str());
+}
+//
+//void WidgetTable::printInTable(int row, int col, std::string text, UserInterface * myIntPointer)//this causes trouble
+//{
+//
+//	UserInterface * myInterface = myIntPointer;
+//
+//
+//	WidgetTable * myTable = myIntPointer->table;
+//
+//	//Fl_Widget * myWidget = myTable->GetElement(row, col);
+//
+//	Fl_Widget * myWidget = static_cast<Fl_Widget*> (myTable->GetVoidElement(row, col));
+//
+//	//Fl_Input * myCell = static_cast<Fl_Input*>(myWidget);
+//
+//	Fl_Input * myCell = (Fl_Input*)(myWidget);
+//
+//	//My_fl_button * myCell = static_cast<My_fl_button*>(myWidget);
+//
+//	std::stringstream buffer;
+//
+//	buffer << "try";
+//	//myCell->value(buffer.str().c_str());
+//
+//	//myCell->value("try");
+//
+//	//Fl_Widget * myWidget = mytable->GetElement(row, col);
+//
+//
+//	/*Fl_Input * myTargetCell =
+//	mytable->GetElement(row, col);*/
+//
+//
+//	//Fl_Input  * targetCell = (Fl_Input*)(table->GetElement(row, col));
+//	//std::stringstream buffer;
+//	//buffer << text;
+//
+//	//targetCell->value(buffer.str().c_str());
+//	//targetCell->value("400");
+//
+//}
 
 //const double UserInterface::TIMER_TIMEOUT = 1.0;
 

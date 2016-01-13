@@ -2,12 +2,18 @@
 
 Pointers Display::StaticPointers(0,0,0);
 
-int Display::mystaticint(0);
+
 
 
 
 Display::Display()
 {
-	window = new UserInterface;
-	//window->show();
+	window = new UserInterface;// (pointers);// (pointers);// = new UserInterface;
+	window->show();
 }
+//
+//void Display::construct(Pointers pointers)
+//{
+//	window = new UserInterface;// (pointers);// (pointers);// = new UserInterface;
+//	window->show();
+//}
